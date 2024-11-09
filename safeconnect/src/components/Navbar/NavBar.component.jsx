@@ -9,7 +9,7 @@ const NavBar = () => {
                 <span>SafeConnect</span>
             </div>
             <div className="navbar-links">
-                <a href="#personal">Personal</a>
+                <a href="#personal">Personal things</a>
                 <a href="#organisation">Organisation</a>
                 <a href="#testimonials">Testimonial</a>
                 <a href="#contact">Contact Us</a>
