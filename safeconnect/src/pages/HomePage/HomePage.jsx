@@ -6,7 +6,7 @@ const HomePage = () => {
     return (
         <div>
             <header className="home-header">
-                <h1>One Brand <span><img src="/src/assets/peach.svg" alt="&" /></span> Two Solutions</h1>
+            <h1>One Brand <span><img src="/src/assets/peach.svg" alt="&" height="60" /></span> Two Solutions</h1>
                 <p>
                     Empower your organization and ensure personal safety with our comprehensive solutions. Discover how we integrate cutting-edge technology to protect individuals and enhance workplace safety.
                 </p>
