@@ -1,4 +1,5 @@
-import PropTypes from "prop-types"; // Import PropTypes
+import PropTypes from "prop-types";
+import './Caller.css';
 
 function PhoneDisplay({ number, handleEndCall }) {
   return (
@@ -6,20 +7,19 @@ function PhoneDisplay({ number, handleEndCall }) {
       <div className="phone-number">{number}</div>
       <div className="call-time">10:15</div>
       <div className="icons">
-        <div>🔊</div>
-        <div>🔒</div>
-        <div>🔇</div>
-        <div>➕</div>
+        <div className="icon">🔊</div>
+        <div className="icon">🔒</div>
+        <div className="icon">🔇</div>
+        <div className="icon">➕</div>
       </div>
       <div className="end-call" onClick={handleEndCall}>📞</div>
     </div>
   );
 }
 
-// Add prop validation
 PhoneDisplay.propTypes = {
-  number: PropTypes.string.isRequired, // Validate that number is a string and is required
-  handleEndCall: PropTypes.func.isRequired, // Validate that handleEndCall is a function and is required
+  number: PropTypes.string.isRequired,
+  handleEndCall: PropTypes.func.isRequired,
 };
 
 export default PhoneDisplay;

@@ -18,9 +18,15 @@ const HomePage = () => {
 
             {/* Loreum Ipsum Below Cards */}
             <div className="loreum-section">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.</p>
-                <p>Donec vehicula cursus at eget dolor. Cras tincidunt quam id fermentum facilisis.</p>
                 <img src="/src/assets/girllong.png" alt="" />
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
+                Donec vehicula cursus at eget dolor. Cras tincidunt quam id fermentum facilisis.</p>
+            </div>
+            <div className="loreum-section">
+                <img src="/src/assets/Fakecall2.png" alt="" />
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.
+                Donec vehicula cursus at eget dolor. Cras tincidunt quam id fermentum facilisis.</p>
+            <img src="/src/assets/Recordbg.png" alt="" />
             </div>
             <div>
             </div>
