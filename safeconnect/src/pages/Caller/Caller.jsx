@@ -29,6 +29,22 @@ function Caller() {
     setShowReceiver(false);
     setPhoneNumber("");
   };
+  const callerSectionStyle = {
+    width: "300px",
+    height: "500px",
+    backgroundColor: "#002147",
+    borderRadius: "45px",
+    marginBottom: "80px",
+    padding: "20px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    color: "white",
+    backgroundImage: `url(${'../assets/412555143.png'})`, // Change this path to your image
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat"
+  };
 
   return (
     <div className="caller-receiver-container">
@@ -43,7 +59,7 @@ function Caller() {
           />
           <button onClick={handleCall}>📞</button>
         </div>
-        <PhoneDisplay number={phoneNumber} />
+        <PhoneDisplay number={phoneNumber}  handleEndCall={handleEndCall} />
       </div>
       {showReceiver && (
         <div className="receiver-section">

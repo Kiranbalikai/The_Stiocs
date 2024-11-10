@@ -1,66 +1,5 @@
 
 
-/* Main container for the options */
-/* .home-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #fce8ef;
-  } */
-  
-  /* Container for message and call options */
-  /* .options-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    width: 100%;
-    max-width: 600px;
-  } */
-  
-  /* Styling for each option */
-  /* .option {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-  } */
-  
-  /* Placeholder for icon style */
-  /* .icon-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
-    height: 150px;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .icon-placeholder:hover {
-    transform: translateY(-5px);
-    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  .option-text {
-    font-size: 18px;
-    font-weight: bold;
-    color: #9e9e9e;
-    margin-top: 10px;
-  }
-  
-  .call-link {
-    text-decoration: none;
-    color: inherit;
-  }
-   */
-
-
   /* Main container styling */
 .main-container {
   text-align: center;
@@ -173,6 +112,7 @@ h2 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  margin-bottom: 20px;
 }
 
 
@@ -180,13 +120,6 @@ h2 {
   filter: brightness(0.5); /* Ensure image stays fully visible */
 }
 
-.option-image {
-  width: 100%;
-  height: 100%;
-  /* margin-bottom: 15px; */
-  transition: filter 0.3s ease;
-  /* position: absolute; */
-}
 
 .description {
   font-size: 0.9em;
@@ -202,9 +135,9 @@ h2 {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  min-height: 40vh;
+  min-height: 30vh;
   line-height: 0.5;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 /* Heading styling */
@@ -233,14 +166,56 @@ h2 {
 }
 
 .option-box:hover {
-  filter: brightness(0.3); /* Darken the image on hover */
+  filter: brightness(0.6); /* Darken the image on hover */
   transform: scale(1.05); 
 }
 
-.option-content {
-  position: absolute; /* Position content inside the div */
-  bottom: 20px;
-  left: 20px;
-  color: white; /* Make text visible over image */
-  z-index: 2; /* Ensure content is above the background */
+.option-box:hover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black overlay */
+  z-index: 1;
+}
+
+.option-box::before {
+  content: "↗"; /* Arrow symbol */
+  font-size: 60px; /* Size of the symbol */
+  color: white; /* White color for the symbol */
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background behind the arrow */
+  padding: 20px;
+  border-color: #fff;
+  border-width: 2px; /* Add border width to make the square */
+  border-style: solid;
+  border-radius: 8px; /* Rounded corners for the square */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px; /* Set square width */
+  height: 40px; /* Set square height */
+  opacity: 0; /* Initially hidden */
+  z-index: 2;
+  transition: opacity 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Stack the arrow and text */
+}
+
+/* Add text below the arrow */
+.option-box::after {
+  content: "Click Here"; /* Text below the arrow */
+  font-size: 10px; /* Font size for the text */
+  color: white; /* White color for the text */
+  margin-top: 10px; /* Space between the arrow and the text */
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease;
+}
+
+.option-box:hover::before {
+  opacity: 1; /* Make the symbol visible */
 }

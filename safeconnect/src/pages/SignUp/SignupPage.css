@@ -3,6 +3,7 @@
     min-height: 100vh;
     display: flex;
     background: linear-gradient(to right, #4a1d3e 50%, #fdf0f7 50%);
+    padding-top: 60px; /* Adjusted for spacing between navbar and page */
 }
 
 .left-section {
@@ -64,6 +65,7 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
+    overflow: hidden; /* Prevents overflow on small screens */
 }
 
 .signup-card {
@@ -97,11 +99,22 @@ label {
 input[type="text"],
 input[type="date"],
 input[type="email"],
-input[type="password"] 
-input[type="name"], 
-input[type="date"] { 
+input[type="password"] {
     width: 100%;
     padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: #333;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+/* Date picker specific styles */
+input[type="date"] {
+    width: 100%;
+    max-width: 250px; /* Set max-width to control the size */
+    padding: 0.5rem;  /* Smaller padding */
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     font-size: 0.875rem;
@@ -113,7 +126,6 @@ input[type="date"] {
 input[type="text"]:focus,
 input[type="date"]:focus,
 input[type="email"]:focus,
-input[type="name"]:focus, 
 input[type="password"]:focus {
     outline: none;
     border-color: #333;
@@ -185,6 +197,7 @@ input::placeholder {
     .signup-page {
         flex-direction: column;
         background: #fdf0f7;
+        padding-top: 80px; /* Extra padding to avoid overlap on smaller screens */
     }
 
     .left-section {

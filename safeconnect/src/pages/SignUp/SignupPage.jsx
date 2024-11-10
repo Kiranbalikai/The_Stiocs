@@ -1,57 +1,74 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
-import axios from 'axios'; // Import axios to make the API request
+import axios from 'axios'; // Import axios for sending HTTP requests
+import DatePicker from 'react-datepicker'; // Import DatePicker
+import 'react-datepicker/dist/react-datepicker.css'; // Import CSS for DatePicker
 import './SignupPage.css';
 
 const SignupPage = () => {
-    // Initial form data state
     const [formData, setFormData] = useState({
-        fullName: '',
-        phoneNo: '',
-        dateOfBirth: '',
+        name: '',
+        phoneno: '',
+        dob: null, // Initialize as null to work with DatePicker
         email: '',
         password: ''
     });
-    const [showPassword, setShowPassword] = useState(false);
-    const [loading, setLoading] = useState(false); // Loading state for the submit button
-    const [error, setError] = useState(''); // Error state to show any errors during the submission
 
-    // Handle change in form fields
+    const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false); // To show a loading state
+    const [error, setError] = useState(''); // To handle error messages
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
-            [name]: value
+            [name]: value || '', // Default to an empty string if value is undefined
         }));
     };
 
-    // Handle form submission
+    const handleDateChange = (date) => {
+        setFormData((prev) => ({
+            ...prev,
+            dob: date
+        }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        // Start loading state
+
+        // Set loading to true
         setLoading(true);
-        setError(''); // Clear any previous errors
+        setError('');
 
         try {
-            // Sending a POST request to the backend API to save user data
-            const response = await axios.post('http://your-api-url/api/user/register', formData);
+            // Send a POST request to the backend API
+            const response = await axios.post(
+                'http://localhost:4000/api/user/register',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',  // Ensure proper content type is set
+                    }
+                }
+            );
 
+            // Check if the response is successful
             if (response.data.success) {
-                // If registration is successful, redirect the user or show success message
-                alert('Registration successful! Please log in.');
+                // If successful, you can navigate to login or display success message
+                alert('Account created successfully!');
                 // Optionally, redirect to login page
+                // window.location.href = '/login'; // Or use react-router if you need to navigate programmatically
             } else {
-                // If registration failed, show error message
+                // Handle errors returned from the server
                 setError(response.data.message || 'Something went wrong, please try again.');
             }
         } catch (err) {
-            // Handle errors if the API request fails
-            setError('An error occurred. Please try again later.');
-            console.error('Error during registration:', err);
+            // Handle network errors
+            console.error('Error during registration:', err.response || err.message);  // Log the error
+            setError('An error occurred. Please try again later.');  // Set error message to display in UI
         } finally {
-            // Stop loading state after submission
+            // Set loading to false after the request
             setLoading(false);
         }
     };
@@ -61,7 +78,7 @@ const SignupPage = () => {
             <div className="left-section">
                 <div className="brand-content">
                     <h1>Safe<br />Connect,</h1>
-                    <p>Lorem Exploded Tagline This.</p>
+                    <p>Lorem Ipsum Tagline Here.</p>
                 </div>
                 <div className="decorative-cards">
                     <div className="card white-card"></div>
@@ -71,40 +88,29 @@ const SignupPage = () => {
             <div className="right-section">
                 <div className="signup-card">
                     <h2>Create an account</h2>
+                    {error && <p className="error-message">{error}</p>} {/* Display error message if any */}
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label htmlFor="fullName">Full Name</label>
+                            <label htmlFor="name">Full Name</label>
                             <input
                                 type="text"
-                                id="fullName"
-                                name="fullName"
-                                value={formData.fullName}
+                                id="name"
+                                name="name"
+                                value={formData.name}
                                 onChange={handleChange}
                                 placeholder="Enter your full name"
                                 required
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="phoneNo">Phone No</label>
+                            <label htmlFor="phoneno">Phone No</label>
                             <input
                                 type="tel"
-                                id="phoneNo"
-                                name="phoneNo"
-                                value={formData.phoneNo}
+                                id="phoneno"
+                                name="phoneno"
+                                value={formData.phoneno}
                                 onChange={handleChange}
                                 placeholder="Enter your phone number"
-                                required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="dateOfBirth">Date Of Birth</label>
-                            <input
-                                type="text"
-                                id="dateOfBirth"
-                                name="dateOfBirth"
-                                value={formData.dateOfBirth}
-                                onChange={handleChange}
-                                placeholder="Enter your DOB"
                                 required
                             />
                         </div>
@@ -117,6 +123,19 @@ const SignupPage = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 placeholder="Enter your email"
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="dob">Date of Birth</label>
+                            <DatePicker
+                                selected={formData.dob}
+                                onChange={handleDateChange}
+                                dateFormat="yyyy-MM-dd"
+                                placeholderText="Select your date of birth"
+                                showMonthDropdown
+                                showYearDropdown
+                                dropdownMode="select"
                                 required
                             />
                         </div>
@@ -144,7 +163,6 @@ const SignupPage = () => {
                                 </button>
                             </div>
                         </div>
-                        {error && <p className="error-message">{error}</p>} {/* Display error if any */}
                         <button type="submit" className="create-account-button" disabled={loading}>
                             {loading ? 'Creating account...' : 'Create account'}
                         </button>

@@ -1,29 +1,38 @@
-import express from "express"
-import cors from "cors"
-import { connectDB } from "./config/db.js"
-import userRouter from "./routes/userRoute.js"
-import "dotenv/config"
+import express from "express";
+import cors from "cors";
+import { connectDB } from "./config/db.js";  // Make sure your DB connection is working correctly
+import userRouter from "./routes/userRoute.js";  // Ensure that userRoute.js is set up properly
+import "dotenv/config";  // Ensure the environment variables are loaded
+
+// Initialize the app
+const app = express();
+const port = 4000;
+
+// Use CORS and JSON middleware
+app.use(express.json());
+app.use(cors({
+    origin: [
+        'http://localhost:3000', // Local dev environment
+        'https://3486-2405-201-d02f-d003-d4ad-d2e2-792c-c8b9.ngrok-free.app',// Your Ngrok URL
+        'http://localhost:5173'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+}));
 
 
-//app config
-const app=express()
-const port=4000
+// Define the API endpoints
+app.use("/api/user", userRouter);
 
-app.use(express.json())
-app.use(cors())
-
-
-//api endpoint
-app.use("/api/user",userRouter)
-
-//db connection 
+// Connect to the database
 connectDB();
 
-app.get("/",(req,res)=>{
-    res.send("API working")
-})
+// Test route
+app.get("/", (req, res) => {
+    res.send("API working");
+});
 
-app.listen(port,()=>{
-    console.log(`server started on http://localhost:${port}`)
-})
-
+// Start the server
+app.listen(port, () => {
+    console.log(`Server started on http://localhost:${port}`);
+});

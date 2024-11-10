@@ -1,120 +1,186 @@
-.caller-receiver-container {
-  display: flex;
-  background-color: #4286b04f;
-  justify-content: space-between;
-  gap: 400px;
-  padding: 20px;
-  padding-top: 60px;
-  align-items: center;
-  justify-content: center;
-  margin-top: 80px;
+  .caller-receiver-container {
+    display: flex;
+    /* background-color: #4286b04f;  */
+    justify-content: space-between;
+    gap: 400px;
+    padding: 20px;
+    padding-top: 60px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80px;
+    background-image: url('../../assets/bgcall.jpg'); /* Change this path as needed */
+    background-size: cover; /* Ensures the image covers the entire section */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+  }
+
+
+  .caller-section, .receiver-section {
+    width: 300px; /* Adjust as needed */
+    height: 500px; /* Adjust as needed */
+    background-color: #002147;
+    border-radius: 45px;
+    margin-bottom: 80px ;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    /* justify-content: center; Center content vertically */
+    color: white;
+  }
+
+  .phone-display {
+    width: 87%; /* Adjust as needed */
+    padding: 10px;
+    height: 400px;
+    background-color: #1b4965;
+    border-radius: 30px;
+    margin-top: 20px;
+    text-align: center;
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally within the PhoneDisplay */
+  }
+
+  h3 {
+    margin-bottom: 20px;
+    color: white;
+    letter-spacing: 3px;
+
+  }
+
+  .input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  input[type="text"] {
+    width: 220px;
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    padding: 10px;
+    border-radius: 35px;
+    border: none;
+    background-color: #ffffff;
+    color: white;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #ff4f41;
+  }
+
+
+
+  .phone-number {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size:x-large;
+    font-weight: bold;
+  }
+
+  .call-time {
+    margin-bottom: 70px;
+    margin-top: 10px;
+  }
+
+  .icons {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 10px;
+  }
+
+  .icons div {
+    font-size: 18px; /* Increase the size as needed */
+    padding: 10px;
+    background-color: #0000004b; /* Optional: adding a background color */
+    border-radius: 45px; /* Rounded corners */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .end-call {
+    padding: 10px;
+    border-radius: 35px;
+    border: none;
+    background-color: #ffffff;
+    color: white;
+    cursor: pointer;
+    margin-top:90px;
+    font-size: 20px;
+  }
+
+  .end-call:hover {
+    background-color: #000000;
+  }
+
+  /* Media Query for tablets and mobile screens */
+@media screen and (max-width: 768px) {
+  .caller-receiver-container {
+    flex-direction: column; /* Stack the elements vertically */
+    gap:20px;
+    width: 100%;
+    margin-top: -10px;
+  }
+
+  .caller-section,.receiver-section {
+    width: 60%; /* Adjust to take more screen width */
+    margin-bottom: 50px;
+  }
+  .receiver-section {
+    width: 60%; /* Adjust to take more screen width */
+    padding: -40%;
+    margin-bottom: 20px;
+  }
+
+  
+  .receiver-section.phone-display{
+    width: 100%;
+    height: 500px; /* Adjust phone display height */
+  }
+  
+  
+  .phone-display {
+    width:87%;
+    width: 270px; /* Full width for phone display */
+    height: 350px; /* Adjust phone display height */
+  }
+
+  .input-container {
+    display: flex; /* Keep input and button side by side */
+    justify-content: space-between; /* Space between input and button */
+    align-items: center;
+    border-radius: 70px;
+    width: 87%; /* Ensure the container is full width */
+  }
+
+  input[type="text"] {
+    width: 60%; /* Adjust input width to leave space for button */
+    margin-right: 10px;
+  }
+
+  button {
+    width: 15%; /* Adjust button width to fit side by side with input */
+  }
+
+  .icons {
+    flex-direction: row; /* Icons in a row for small screens */
+    justify-content: center; /* Center the icons */
+    width: 80%;
+  }
+
+  .end-call {
+    width: 10%; /* Full width end-call button on mobile */
+  }
 }
 
-.caller-section, .receiver-section {
-  width: 300px; /* Adjust as needed */
-  height: 500px; /* Adjust as needed */
-  background-color: #002147;
-  border-radius: 45px;
-  margin-bottom: 80px ;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center content horizontally */
-  /* justify-content: center; Center content vertically */
-  color: white;
-}
-
-.phone-display {
-  width: 87%; /* Adjust as needed */
-  padding: 10px;
-  height: 400px;
-  background-color: #1b4965;
-  border-radius: 30px;
-  margin-top: 20px;
-  text-align: center;
-  padding:20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center items horizontally within the PhoneDisplay */
-}
-
-h3 {
-  margin-bottom: 20px;
-  color: white;
-  letter-spacing: 3px;
-
-}
-
-.input-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-input[type="text"] {
-  width: 200px;
-  padding: 10px;
-  margin-right: 10px;
-  border-radius: 25px;
-  border: 1px solid #ccc;
-}
-
-button {
-  padding: 10px;
-  border-radius: 35px;
-  border: none;
-  background-color: #ffffff;
-  color: white;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #ff4f41;
-}
-
-
-
-.phone-number {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  font-size:x-large;
-  font-weight: bold;
-}
-
-.call-time {
-  margin-bottom: 70px;
-  margin-top: 10px;
-}
-
-.icons {
-  display: flex;
-  gap: 30px;
-  margin-bottom: 10px;
-}
-
-.icons div {
-  font-size: 18px; /* Increase the size as needed */
-  padding: 10px;
-  background-color: #0000004b; /* Optional: adding a background color */
-  border-radius: 45px; /* Rounded corners */
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.end-call {
-  padding: 10px;
-  border-radius: 35px;
-  border: none;
-  background-color: #ffffff;
-  color: white;
-  cursor: pointer;
-  margin-top:90px;
-  font-size: 20px;
-}
-
-.end-call:hover {
-  background-color: #000000;
-}

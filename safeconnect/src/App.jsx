@@ -5,10 +5,12 @@ import Footer from './components/Footer/Footer.jsx';
 import LoginPage from './pages/Login/LoginPage.jsx';
 import SignupPage from './pages/SignUp/SignupPage.jsx';
 import Caller from './pages/Caller/Caller.jsx';
+import ChatPage from './pages/ChatPage/ChatPage.jsx';
 import './index.css';
 import Choice from './pages/Choice/Choice.jsx';
 import StoreContextProvider from './context/StoreContext'; // Import the context provider
 import { ToastContainer } from 'react-toastify'; // Import ToastContainer to show toasts
+
 
 function App() {
   return ( 
@@ -22,6 +24,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/call" element={<Caller />} />
             <Route path="/choice" element={<Choice />} />
+            <Route path="/chatpage" element={<ChatPage />} />
           </Routes>
           <Footer />
         </div>
