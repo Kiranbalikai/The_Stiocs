@@ -1,5 +1,5 @@
 // src/pages/HomePage.jsx
-import React from 'react';
+
 import './HomePage.css';
 
 const HomePage = () => {
@@ -18,11 +18,14 @@ const HomePage = () => {
                 {/* Section 1: Image Left, Text Right */}
                 <div className="content-block">
                     <div className="content-image">
-                        <img src="/src/assets/girl.png" alt="Empowerment" />
+                        <img src="/src/assets/girl.png" alt="Empowerment" /
+                        >
                     </div>
                     <div className="content-text">
                         <h1>Safe Conversations to Avoid Toxicity </h1>
-                        <p>Our platform prioritizes a safe and respectful messaging experience. Each message is analyzed by an intelligent filtering system that checks for offensive or harmful language. If a message is identified as potentially toxic, users receive a notification, alerting them that the sender may be engaging in inappropriate or offensive communication. This feature empowers users to be aware of any concerning interactions without blocking the message outright, helping them make informed decisions while fostering a safe and supportive environment.</p>
+                        <p>Our platform prioritizes a safe and respectful messaging experience. Each message is analyzed by an intelligent filtering system that checks for offensive or harmful language.
+                             If a message is identified as potentially toxic, users receive a notification, alerting them that the sender may be engaging in inappropriate or offensive communication. 
+                             This feature empowers users to be aware of any concerning interactions without blocking the message outright, helping them make informed decisions while fostering a safe and supportive environment.</p>
                     </div>
                 </div>
 

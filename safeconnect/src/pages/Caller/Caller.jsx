@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PhoneDisplay from "./PhoneDisplay.jsx";
 import Receiver from "./Receiver";
+import { StoreContext } from "../../context/StoreContext"; // Import StoreContext to check token
 import './Caller.css';
 
 function Caller() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [showReceiver, setShowReceiver] = useState(false);
+  const { token } = useContext(StoreContext); // Access token from context
+  const navigate = useNavigate();
+
+  // Redirect to home if user logs out (token becomes empty)
+  useEffect(() => {
+    if (!token) {
+      navigate("/"); // Redirect to home page
+    }
+  }, [token, navigate]);
 
   const validatePhoneNumber = (number) => {
     const phonePattern = /^\d{10}$/;
@@ -29,6 +40,7 @@ function Caller() {
     setShowReceiver(false);
     setPhoneNumber("");
   };
+
   const callerSectionStyle = {
     width: "300px",
     height: "500px",
@@ -40,7 +52,7 @@ function Caller() {
     flexDirection: "column",
     alignItems: "center",
     color: "white",
-    backgroundImage: `url(${'../assets/412555143.png'})`, // Change this path to your image
+    backgroundImage: `url(${'../assets/412555143.png'})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat"
@@ -59,7 +71,7 @@ function Caller() {
           />
           <button onClick={handleCall}>📞</button>
         </div>
-        <PhoneDisplay number={phoneNumber}  handleEndCall={handleEndCall} />
+        <PhoneDisplay number={phoneNumber} handleEndCall={handleEndCall} />
       </div>
       {showReceiver && (
         <div className="receiver-section">

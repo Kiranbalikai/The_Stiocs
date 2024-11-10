@@ -1,50 +1,47 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import {  useNavigate } from "react-router-dom";
+import { StoreContext } from "../../context/StoreContext"; // Import StoreContext
 import "./Choice.css";
 
-// const Choice = () => (
-//   <div className="home-container">
-//     <div className="options-container">
-//       {/* Message Option */}
-//       <div className="option">
-//         <div className="icon-placeholder">
-//           <span role="img" aria-label="Message Icon">💬</span>
-//           <p className="option-text">Message</p>
-//         </div>
-//       </div>
+const Choice = () => {
+    const { token } = useContext(StoreContext); // Get token from StoreContext
+    const navigate = useNavigate();
 
-//       {/* Call Option */}
-//       <div className="option">
-//         <Link to="/caller" className="call-link">
-//           <div className="icon-placeholder">
-//             <span role="img" aria-label="Call Icon">📞</span>
-//             <p className="option-text">Call</p>
-//           </div>
-//         </Link>
-//       </div>
-//     </div>
-//   </div>
-// );
+    // Handler function to check authentication and navigate accordingly
+    const handleOptionClick = (path) => {
+        if (token) {
+            navigate(path); // If authenticated, navigate to the chosen path
+        } else {
+            navigate("/login"); // Redirect to login if not authenticated
+        }
+    };
 
-const Choice = () => (
-  <div className="main-container">
-    <header className="Choice-header">
-      <h1>Secure   <span><img src="/src/assets/peach.svg" alt="&" height="60" /></span> Connect</h1>
-      <p>
-        Discover how our innovative solutions ensure personal safety and improve organizational workflows. Cutting-edge technology designed to keep people connected and secure.      </p>
-    </header>
+    return (
+        <div className="main-container">
+            <header className="Choice-header">
+                <h1>
+                    Secure <span><img src="/src/assets/peach.svg" alt="&" height="60" /></span> Connect
+                </h1>
+                <p>
+                    Discover how our innovative solutions ensure personal safety and improve organizational workflows. Cutting-edge technology designed to keep people connected and secure.
+                </p>
+            </header>
 
-    <div className="options-container">
-      {/* Message Option */}
-      
-      <Link to="/message" className="option-box option-box1"></Link>
+            <div className="options-container">
+                {/* Message Option */}
+                <div
+                    className="option-box option-box1"
+                    onClick={() => handleOptionClick("/chatpage")}>
+                </div>
 
-      {/* Call Option */}
-      
-      <Link to="/call" className="option-box option-box2"></Link>
-    </div>
-  </div>
-);
-
+                {/* Call Option */}
+                <div
+                    className="option-box option-box2"
+                    onClick={() => handleOptionClick("/call")}>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default Choice;
-
