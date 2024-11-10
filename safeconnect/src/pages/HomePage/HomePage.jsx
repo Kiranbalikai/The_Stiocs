@@ -6,17 +6,18 @@ const HomePage = () => {
     return (
         <div>
             <header className="home-header">
-            <h1>One Brand <span><img src="/src/assets/peach.svg" alt="&" height="60" /></span> Two Solutions</h1>
+                <h1>One Brand <span><img src="/src/assets/peach.svg" alt="&" height="60" /></span> Two Solutions</h1>
                 <p>
-                    Empower your organization and ensure personal safety with our comprehensive solutions. Discover how we integrate cutting-edge technology to protect individuals and enhance workplace safety.
+                    Empower your organization and ensure personal safety with our comprehensive solutions. Discover how we integrate cutting-edge technology to protect individuals and enhance workplace safety. <span id='starsvg'><img src="/src/assets/star.svg" alt="" /></span>
                 </p>
-            </header>
-            <section className="solutions">
-                <div className="solution-box">
-                    <h2>Women's Safety App</h2>
-                    <p>Features: Safe OTP, SOS, Track Me, Ask For Help</p>
+            </header><div class="card-container">
+                <div class="card">
+                    <p>Card 1 Content</p>
                 </div>
-            </section>
+                <div class="card">
+                    <p>Card 2 Content</p>
+                </div>
+            </div>
         </div>
     );
 };

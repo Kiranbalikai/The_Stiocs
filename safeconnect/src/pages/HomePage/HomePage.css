@@ -1,81 +1,81 @@
-/* HomePage.css */
-
+/* Main container styling for the home header */
 .home-header {
-    background-color: #FEF4F8;; /* Dark background from the new color */
-    color: #FEF4F8; /* Light pink for text from the new color */
-    padding: 4rem 2rem;
+    background-color: #Fffff;
+    color: #FEF4F8;
+    padding: 2rem 1rem;
     text-align: center;
-}
-
-.home-header h1 {
-    font-size: 5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    color: #FE7678; /* White for better contrast */
-    
-}
-
-.home-header p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    color: #bbb; /* Light gray for secondary text */
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.solutions {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 3rem 2rem;
-    background-color: #FEF4F8; /* Light pink box background */
+    min-height: 50vh;
 }
 
-.solution-box {
-    background-color: #601D4E; /* Dark background from the new color */
-    color: #601D4E; /* Dark color text */
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    max-width: 300px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.solution-box h2 {
-    font-size: 1.5rem;
+/* Heading styling */
+.home-header h1 {
+    font-size: clamp(2rem, 5vw + 1rem, 5rem);
+    font-weight: bold;
+    font-family: cursive, sans-serif;
     margin-bottom: 1rem;
-    color: #601D4E; /* Dark color for headings */
+    color: #FE7678;
+    line-height: 1.2;
 }
 
-.solution-box p {
-    font-size: 1rem;
-    color: #601D4E; /* Dark color for text */
+/* Paragraph styling */
+.home-header p {
+    font-size: clamp(0.875rem, 1vw + 0.5rem, 1.2rem);
+    font-family: cursive, sans-serif;
+    line-height: 1.5;
+    color: #bbb;
 }
 
-.solution-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+
+
+/* Extra small devices (phones, 320px and up) */
+@media only screen and (min-width: 320px) {
+    .home-header {
+        padding: 1.5rem 0.5rem;
+    }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .home-header h1 {
-        font-size: 2rem;
+/* Small devices (large phones, 375px and up) */
+@media only screen and (min-width: 375px) {
+    .home-header {
+        padding: 2rem 1rem;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .home-header {
+        padding: 3rem 2rem;
     }
 
     .home-header p {
-        font-size: 1rem;
-        padding: 0 1rem;
-    }
-
-    .solutions {
-        flex-direction: column;
-        padding: 2rem 1rem;
-    }
-
-    .solution-box {
-        max-width: 100%;
-        margin: 1rem 0;
+        max-width: 80%;
     }
 }
+
+/* Large devices (desktops, 1024px and up) */
+@media only screen and (min-width: 1024px) {
+    .home-header {
+        padding: 4rem 3rem;
+    }
+
+    .home-header p {
+        max-width: 1000px;
+    }
+    .home-header p.starsvg{
+        width: 200px;
+    }
+}
+
+/* Extra large devices (large desktops, 1440px and up) */
+@media only screen and (min-width: 1440px) {
+    .home-header {
+        padding: 5rem 4rem;
+    }
+}
+
+
+

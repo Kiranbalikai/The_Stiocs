@@ -1,0 +1,71 @@
+/* Responsive styles for smaller screens */
+@media (max-width: 425px) {
+    .signup-page {
+        flex-direction: column;
+        background: #fdf0f7;
+    }
+
+    .left-section {
+        padding: 1.5rem;
+        min-height: 200px;
+        background: #4a1d3e;
+        align-items: center; /* Center align for smaller screens */
+        text-align: center;
+    }
+
+    .brand-content h1 {
+        font-size: 2rem; /* Smaller heading */
+        line-height: 1.1; /* Tighter line height */
+    }
+
+    .brand-content p {
+        font-size: 0.9rem; /* Slightly smaller text */
+    }
+
+    .decorative-cards {
+        bottom: 5%;
+        width: 150px; /* Smaller size for decorative elements */
+    }
+
+    .card {
+        width: 100px;
+        height: 150px;
+    }
+
+    .right-section {
+        padding: 1rem;
+    }
+
+    .signup-card {
+        padding: 1rem;
+        max-width: 90%; /* Narrower card for smaller screens */
+    }
+
+    .signup-card h2 {
+        font-size: 1.25rem;
+    }
+
+    .form-group {
+        margin-bottom: 0.75rem;
+    }
+
+    label {
+        font-size: 0.8rem;
+    }
+
+    input {
+        padding: 0.6rem; /* Smaller padding for inputs */
+        font-size: 0.8rem; /* Slightly smaller font size */
+    }
+
+    .create-account-button {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+        margin-top: 0.75rem;
+    }
+
+    .login-text {
+        font-size: 0.8rem;
+        margin-top: 1rem;
+    }
+}

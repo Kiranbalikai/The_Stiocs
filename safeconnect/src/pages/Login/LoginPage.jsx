@@ -16,56 +16,58 @@ const LoginPage = () => {
 
     return (
         <div className="login-page">
-            <div className="login-card">
-                <h1>Login to your account</h1>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter your email"
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <div className="password-header">
-                            <label htmlFor="password">Password</label>
-                            <Link to="/forgot-password" className="forgot-link">
-                                Forgot?
-                            </Link>
-                        </div>
-                        <div className="password-input-container">
+            <div className="login-page-wrapper">
+                <div className="login-card">
+                    <h1>Login to your account</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="email">Email</label>
                             <input
-                                type={showPassword ? "text" : "password"}
-                                id="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Enter your password"
+                                type="email"
+                                id="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter your email"
                                 required
                             />
-                            <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="password-toggle"
-                                aria-label={showPassword ? "Hide password" : "Show password"}
-                            >
-                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                            </button>
                         </div>
-                    </div>
-                    <button type="submit" className="login-button">
-                        Login now
-                    </button>
-                </form>
-                <p className="signup-text">
-                    Don’t Have An Account?{' '}
-                    <Link to="/signup" className="signup-link">
-                        Sign up
-                    </Link>
-                </p>
+                        <div className="form-group">
+                            <div className="password-header">
+                                <label htmlFor="password">Password</label>
+                                <Link to="/forgot-password" className="forgot-link">
+                                    Forgot?
+                                </Link>
+                            </div>
+                            <div className="password-input-container">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    id="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="Enter your password"
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="password-toggle"
+                                    aria-label={showPassword ? "Hide password" : "Show password"}
+                                >
+                                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit" className="login-button">
+                            Login now
+                        </button>
+                    </form>
+                    <p className="signup-text">
+                        Don’t Have An Account?{' '}
+                        <Link to="/signup" className="signup-link">
+                            Sign up
+                        </Link>
+                    </p>
+                </div>
             </div>
         </div>
     );

@@ -1,0 +1,146 @@
+
+/* General App styling */
+.app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #e8f2f9;
+    min-height: 100vh;
+  }
+  
+  .caller-section, .receiver-section {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    width: 300px;
+  }
+  .receiver-section {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    width: 300px;
+    margin-top: 70px;
+  }
+  
+  h2 {
+    font-size: 18px;
+    margin-top: 50px;
+    font-weight: bold;
+    align-items: center;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 30px;
+    background-color: #282c34 rgba(0, 0, 0, 0.7);
+  
+    /* margin-bottom: 20px; */
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    width: 180px;
+  }
+  
+  button {
+    background-color: #073f76;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .phone-display {
+    background-color: #003b75;
+    color: white;
+    width: 250px;
+    height: 370px;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 70px;
+    text-align: center;
+    box-shadow: 10px 10px 15px  rgba(0, 0, 0, 0.7);
+  }
+  
+  .phone-number {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .call-time {
+    margin-top: -30px;
+    font-size: 12px;
+  }
+  
+  .icons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 80px;
+    height:80px;
+    /* padding-left: 20px; */
+    width: 90%;
+  }
+  
+  .icon {
+    background-color: #2f5a7f;
+    border-radius: 50%;
+    width: 500px;
+    height: 50px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  
+  .end-call {
+    background-color: white;
+    color: #003366;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .caller-receiver-container {
+    display: flex;
+    gap: 200px; /* Space between Caller and Receiver */
+  }
+  
+  .caller-section,
+  .receiver-section {
+    /* padding-left: 100px; */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .receiver-section {
+    border-left: 1px solid #ccc;
+    padding-left: 130px;
+    /* padding-bottom: 100px; */
+    /* margin-bottom:150px ; */
+  }
+  
+  
+  
