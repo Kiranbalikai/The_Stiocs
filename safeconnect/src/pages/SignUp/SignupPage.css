@@ -1,11 +1,18 @@
 /* Main container for the signup page */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
 .signup-page {
     min-height: 100vh;
     display: flex;
-    background: linear-gradient(to right, #4a1d3e 50%, #fdf0f7 50%);
+    background: linear-gradient(to right, #ffffff 50%, #ffffff 50%);
     padding-top: 60px; /* Adjusted for spacing between navbar and page */
 }
 
+/* Left section (image and brand) */
 .left-section {
     flex: 1;
     padding: 4rem;
@@ -32,40 +39,20 @@
     opacity: 0.8;
 }
 
-.decorative-cards {
-    position: absolute;
-    bottom: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 300px;
-    height: 200px;
+.brand-content img {
+    width: auto;
+    height: auto;
+    margin-left: 25%;
 }
 
-.card {
-    position: absolute;
-    width: 200px;
-    height: 300px;
-    border-radius: 10px;
-}
-
-.white-card {
-    background: white;
-    transform: rotate(-15deg);
-    z-index: 1;
-}
-
-.coral-card {
-    background: #ff6b6b;
-    transform: rotate(15deg);
-}
-
+/* Right section (signup card) */
 .right-section {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    overflow: hidden; /* Prevents overflow on small screens */
+    overflow: hidden;
 }
 
 .signup-card {
@@ -113,8 +100,8 @@ input[type="password"] {
 /* Date picker specific styles */
 input[type="date"] {
     width: 100%;
-    max-width: 250px; /* Set max-width to control the size */
-    padding: 0.5rem;  /* Smaller padding */
+    max-width: 250px;
+    padding: 0.5rem;
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     font-size: 0.875rem;
@@ -197,27 +184,17 @@ input::placeholder {
     .signup-page {
         flex-direction: column;
         background: #fdf0f7;
-        padding-top: 80px; /* Extra padding to avoid overlap on smaller screens */
+        padding-top: 80px;
     }
 
     .left-section {
         padding: 2rem;
         min-height: 300px;
-        background: #4a1d3e;
+        background: #ffffff;
     }
 
     .brand-content h1 {
         font-size: 2.5rem;
-    }
-
-    .decorative-cards {
-        bottom: 10%;
-        width: 200px;
-    }
-
-    .card {
-        width: 150px;
-        height: 225px;
     }
 
     .right-section {

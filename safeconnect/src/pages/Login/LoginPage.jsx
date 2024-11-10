@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext'; // Import StoreContext
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -56,6 +56,7 @@ const LoginPage = () => {
                 <div className="brand-content">
                     <h1>Safe Connect</h1>
                     <p>Lorem Ipsum Tagline Here.</p>
+                    <img src="/src/assets/contact.png" alt="Brand Image" />
                 </div>
             </div>
             <div className="right-section">

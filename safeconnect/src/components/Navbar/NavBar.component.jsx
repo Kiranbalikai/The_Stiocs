@@ -1,13 +1,15 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { StoreContext } from '../../context/StoreContext'; // Correct path to StoreContext
-import { LogOut } from 'lucide-react'; // Assuming you want to use an icon for logout
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { StoreContext } from '../../context/StoreContext'; 
+import { LogOut } from 'lucide-react'; 
 import './NavBar.css';
 
 const NavBar = () => {
     const { token, logout } = useContext(StoreContext);  // Get token and logout from context
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);  // New state for dropdown visibility
+    const location = useLocation();  // Get current location (URL path)
+    const navigate = useNavigate();  // For programmatic navigation
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -22,19 +24,54 @@ const NavBar = () => {
         setIsDropdownOpen(false);  // Close dropdown after logging out
     };
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });  // Scroll to the top smoothly
+    };
+
+    // Scroll to bottom of the Home page
+    const handleContactScroll = (e) => {
+        e.preventDefault();
+        // First, redirect to home
+        navigate('/');  // Navigate to home page
+        // Then scroll to the footer after a slight delay (to ensure the page loads)
+        setTimeout(() => {
+            const footerElement = document.getElementById('footer');
+            if (footerElement) {
+                footerElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 200); // Add a small delay to ensure the navigation is complete
+    };
+
+    const handleHomeClick = () => {
+        if (location.pathname === '/') {
+            scrollToTop();  // Scroll to top if already on the home page
+        } else {
+            navigate('/');  // Redirect to home if not on the home page
+        }
+    };
+
+    const handleServicesClick = () => {
+        navigate('/choice');  // Redirect to services page
+    };
+
     return (
         <nav className="navbar">
             <div className="navbar-logo">
-                <img src="/src/assets/logo1.png" alt="SafeConnect" />
+                {/* Logo with conditional behavior based on the current page */}
+                <img
+                    src="/src/assets/logo1.png"
+                    alt="SafeConnect"
+                    onClick={handleHomeClick}
+                    style={{ cursor: 'pointer' }}
+                />
             </div>
             <button className="navbar-toggle" onClick={toggleMenu}>
                 ☰
             </button>
             <div className={`navbar-links ${isMenuOpen ? 'show' : ''}`}>
-                <Link to="/" onClick={toggleMenu}>Home</Link>
-                <Link to="/choice" onClick={toggleMenu}>Services</Link>
-                <Link to="/contact" onClick={toggleMenu}>Contact Us</Link>
-
+                <a href="/" onClick={handleHomeClick}>Home</a>
+                <a href="#services" onClick={handleServicesClick}>Services</a>
+                <a href="#footer" onClick={handleContactScroll}>Contact Us</a>  {/* Contact Us link */}
                 {/* Conditionally render Log In or Profile Icon */}
                 {token ? (
                     <div className="profile-icon-container">
@@ -63,4 +100,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-

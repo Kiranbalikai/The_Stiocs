@@ -69,12 +69,8 @@ const SignupPage = () => {
         <div className="signup-page">
             <div className="left-section">
                 <div className="brand-content">
-                    <h1>Safe<br />Connect,</h1>
-                    <p>Lorem Ipsum Tagline Here.</p>
-                </div>
-                <div className="decorative-cards">
-                    <div className="card white-card"></div>
-                    <div className="card coral-card"></div>
+                    <h1>Safe Connect</h1>
+                    <img src="/src/assets/contact.png" alt="" />
                 </div>
             </div>
             <div className="right-section">
