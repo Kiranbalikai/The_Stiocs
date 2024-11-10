@@ -1,5 +1,4 @@
 import PropTypes from "prop-types"; // Import PropTypes
-import "./call.css";
 
 function PhoneDisplay({ number, handleEndCall }) {
   return (

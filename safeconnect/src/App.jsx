@@ -4,11 +4,12 @@ import NavBar from './components/Navbar/NavBar.component.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import LoginPage from './pages/Login/LoginPage.jsx';
 import SignupPage from './pages/SignUp/SignupPage.jsx';
-import Caller from './pages/Call Page/Caller.jsx';
+import Caller from './pages/Caller/Caller.jsx';
 import './index.css';
+import Choice from './pages/Choice/Choice.jsx';
 
 function App() {
-  return (
+  return (<> 
     <Router>
       <div className="App">
         <NavBar />
@@ -17,10 +18,12 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/call" element={<Caller />} />
+          <Route path="/choice" element={<Choice/>}/>
         </Routes>
         <Footer />
       </div>
     </Router>
+    </>
   );
 }
 

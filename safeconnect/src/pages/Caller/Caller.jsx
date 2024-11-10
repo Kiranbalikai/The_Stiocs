@@ -1,6 +1,7 @@
 import { useState } from "react";
-import PhoneDisplay from "./PhoneDisplay";
+import PhoneDisplay from "./PhoneDisplay.jsx";
 import Receiver from "./Receiver";
+import './Caller.css';
 
 
 
@@ -35,7 +36,7 @@ function Caller() {
   return (
     <div className="caller-receiver-container">
     <div className="caller-section">
-      <h2>Caller Side:</h2>
+      <h2 id="1">Caller Side:</h2>
       <div className="input-container">
         <input
           type="text"

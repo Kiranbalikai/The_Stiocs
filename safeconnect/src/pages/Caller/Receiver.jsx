@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import PropTypes from "prop-types"; // Import PropTypes
 import PhoneDisplay from "./PhoneDisplay";
-import "./call.css";
+import PropTypes from "prop-types"; // Import PropTypes
+import './Caller.css';
+
+// import './call.css';
 
 function Receiver({ handleEndCall }) {
   const [randomNumber, setRandomNumber] = useState("");
