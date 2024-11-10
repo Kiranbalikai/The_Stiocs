@@ -28,28 +28,32 @@ import "./Choice.css";
 const Choice = () => (
   <div className="main-container">
     <header className="Choice-header">
-      <h1>One Brand & Two Solutions</h1>
+      <h1>One Brand   <span><img src="/src/assets/peach.svg" alt="&" height="60" /></span> Two Solutions</h1>
       <p>
         Empower your organization and ensure personal safety with our comprehensive solutions. Discover how we integrate cutting-edge technology to protect individuals and enhance workplace safety.
       </p>
-      <span id="starsvg"><img src="/src/assets/star.svg" alt="Star Icon" /></span>
     </header>
 
     <div className="options-container">
       {/* Message Option */}
-      <div className="option-box 1">
-        <Link to="/message">
-          <img src="src/Group-78631.svg" alt="Message Icon" className="option-image" />
+      
+      <div className="option-box option-box1">
+      <Link to="/message">      
+        <div className="option-content">
           <h2>Message App</h2>
-        </Link>
+          <p>Send messages securely and quickly.</p>
+      </div></Link>
       </div>
 
       {/* Call Option */}
-      <div className="option-box 2">
-        <Link to="/call">
-          <img src="vector-person-calling_844724-19410.jpg" alt="Call Icon" className="option-image" />
+      
+      <div className="option-box option-box2">
+      <Link to="/call">
+        <div className="option-content">
           <h2>Call App</h2>
-        </Link>
+          <p>Connect with safety contacts instantly.</p>
+        </div>
+      </Link>
       </div>
     </div>
   </div>

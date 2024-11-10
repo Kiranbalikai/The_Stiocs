@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import PhoneDisplay from "./PhoneDisplay";
-import PropTypes from "prop-types"; // Import PropTypes
+import PropTypes from "prop-types";
 import './Caller.css';
-
-// import './call.css';
 
 function Receiver({ handleEndCall }) {
   const [randomNumber, setRandomNumber] = useState("");
@@ -17,15 +15,14 @@ function Receiver({ handleEndCall }) {
 
   return (
     <div className="receiver-section">
-      <h2>Receiver End :</h2>
+      <h3>Receiver End:</h3>
       <PhoneDisplay number={randomNumber} handleEndCall={handleEndCall} />
     </div>
   );
 }
 
-// Add prop validation
 Receiver.propTypes = {
-  handleEndCall: PropTypes.func.isRequired, // Validate that handleEndCall is a function and is required
+  handleEndCall: PropTypes.func.isRequired,
 };
 
 export default Receiver;

@@ -1,17 +1,29 @@
-// LoginPage.jsx
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import { StoreContext } from '../../context/StoreContext'; // Import the context
 import './LoginPage.css';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const { login } = useContext(StoreContext); // Get the login function from context
+    const navigate = useNavigate(); // Use navigate to redirect after successful login
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Login attempted with:', { email, password });
+
+        // Call the login function and await the result
+        const result = await login(email, password);
+
+        if (result === true) {
+            // If login is successful, redirect to dashboard
+            navigate('/dashboard');
+        } else {
+            // If login fails, show an alert with the error message
+            alert(result); // This will display the error message like "Incorrect email or password"
+        }
     };
 
     return (

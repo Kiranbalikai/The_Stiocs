@@ -3,9 +3,6 @@ import PhoneDisplay from "./PhoneDisplay.jsx";
 import Receiver from "./Receiver";
 import './Caller.css';
 
-
-
-
 function Caller() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [showReceiver, setShowReceiver] = useState(false);
@@ -35,26 +32,26 @@ function Caller() {
 
   return (
     <div className="caller-receiver-container">
-    <div className="caller-section">
-      <h2 id="1">Caller Side:</h2>
-      <div className="input-container">
-        <input
-          type="text"
-          placeholder="Enter 10-digit number"
-          value={phoneNumber}
-          onChange={handleInputChange}
-        />
-        <button onClick={handleCall}>📞</button>
+      <div className="caller-section">
+        <h3>Caller Side:</h3>
+        <div className="input-container">
+          <input
+            type="text"
+            placeholder="Enter 10-digit number"
+            value={phoneNumber}
+            onChange={handleInputChange}
+          />
+          <button onClick={handleCall}>📞</button>
+        </div>
+        <PhoneDisplay number={phoneNumber} />
       </div>
-      <PhoneDisplay number={phoneNumber} />
+      {showReceiver && (
+        <div className="receiver-section">
+          <Receiver handleEndCall={handleEndCall} />
+        </div>
+      )}
     </div>
-    {showReceiver && (
-      <div className="receiver-section">
-        <Receiver handleEndCall={handleEndCall} />
-      </div>
-    )}
-  </div>
-  )
+  );
 }
 
 export default Caller;

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import axios from 'axios'; // Import axios to make the API request
 import './SignupPage.css';
 
 const SignupPage = () => {
+    // Initial form data state
     const [formData, setFormData] = useState({
         fullName: '',
         phoneNo: '',
@@ -12,7 +14,10 @@ const SignupPage = () => {
         password: ''
     });
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false); // Loading state for the submit button
+    const [error, setError] = useState(''); // Error state to show any errors during the submission
 
+    // Handle change in form fields
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
@@ -21,9 +26,34 @@ const SignupPage = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    // Handle form submission
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Signup attempted with:', formData);
+        
+        // Start loading state
+        setLoading(true);
+        setError(''); // Clear any previous errors
+
+        try {
+            // Sending a POST request to the backend API to save user data
+            const response = await axios.post('http://your-api-url/api/user/register', formData);
+
+            if (response.data.success) {
+                // If registration is successful, redirect the user or show success message
+                alert('Registration successful! Please log in.');
+                // Optionally, redirect to login page
+            } else {
+                // If registration failed, show error message
+                setError(response.data.message || 'Something went wrong, please try again.');
+            }
+        } catch (err) {
+            // Handle errors if the API request fails
+            setError('An error occurred. Please try again later.');
+            console.error('Error during registration:', err);
+        } finally {
+            // Stop loading state after submission
+            setLoading(false);
+        }
     };
 
     return (
@@ -31,7 +61,7 @@ const SignupPage = () => {
             <div className="left-section">
                 <div className="brand-content">
                     <h1>Safe<br />Connect,</h1>
-                    <p>Lorem Expoldj This Tagline Athis.</p>
+                    <p>Lorem Exploded Tagline This.</p>
                 </div>
                 <div className="decorative-cards">
                     <div className="card white-card"></div>
@@ -74,7 +104,7 @@ const SignupPage = () => {
                                 name="dateOfBirth"
                                 value={formData.dateOfBirth}
                                 onChange={handleChange}
-                                placeholder="Enter your dob"
+                                placeholder="Enter your DOB"
                                 required
                             />
                         </div>
@@ -114,8 +144,9 @@ const SignupPage = () => {
                                 </button>
                             </div>
                         </div>
-                        <button type="submit" className="create-account-button">
-                            Create account
+                        {error && <p className="error-message">{error}</p>} {/* Display error if any */}
+                        <button type="submit" className="create-account-button" disabled={loading}>
+                            {loading ? 'Creating account...' : 'Create account'}
                         </button>
                     </form>
                     <p className="login-text">

@@ -161,25 +161,31 @@ h2 {
 
 .option-box {
   width: 100%;
-  height: 250px;
-  padding: 20px;
-  border-radius: 12px;
+  height: 350px;
+  border-radius: 15px;
   background-color: #f8ebf5;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
   text-align: center;
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.option-box:hover {
-  background-color: rgba(0, 0, 0, 0.7); /* Transparent black shade */
-  transform: scale(1.05);
+
+.option-box:hover .option-image {
+  filter: brightness(0.5); /* Ensure image stays fully visible */
 }
 
 .option-image {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 15px;
+  width: 100%;
+  height: 100%;
+  /* margin-bottom: 15px; */
+  transition: filter 0.3s ease;
+  /* position: absolute; */
 }
 
 .description {
@@ -198,6 +204,7 @@ h2 {
   align-items: center;
   min-height: 40vh;
   line-height: 0.5;
+  margin-top: 20px;
 }
 
 /* Heading styling */
@@ -217,15 +224,23 @@ h2 {
   color: #bbb;
 }
 
-.option-image1{
-  width: 350px;
-  height: 180px;
-  background-color: #ff6366;
-  border-radius: 12px;
+.option-box1{ 
+  background-image: url("/src/assets/message.png");
 }
-.option-end{
-  width: 100%;
-  height: 20px;
-  background-color: #e02b55;
-  border-radius: 0px 0px 12px 12px;
+
+.option-box2{ 
+  background-image: url("/src/assets/Call.png");
+}
+
+.option-box:hover {
+  filter: brightness(0.3); /* Darken the image on hover */
+  transform: scale(1.05); 
+}
+
+.option-content {
+  position: absolute; /* Position content inside the div */
+  bottom: 20px;
+  left: 20px;
+  color: white; /* Make text visible over image */
+  z-index: 2; /* Ensure content is above the background */
 }
