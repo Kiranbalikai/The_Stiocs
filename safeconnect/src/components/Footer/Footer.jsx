@@ -1,49 +1,63 @@
-import React from 'react';
-import './Footer.css';  // Import Footer-specific styles
+import { Link } from 'react-router-dom';
+import './Footer.css';
 
-const Footer = () => (
-    <footer className="footer">
-        <div className="footer-container">
-            <div className="footer-logo">
-                <img src="../assets/logo.png" alt="I'm Safe Logo" />
-                <p>I'm Safe is an innovative app that uses cutting-edge technology to ensure the safety of people at all times.</p>
-            </div>
-            <div className="footer-links">
-                <a href="#">Personal</a>
-                <a href="#">Organisation</a>
-                <a href="#">Testimonials</a>
-                <a href="#">Contact Us</a>
-            </div>
-            <div className="footer-newsletter">
-                <input type="email" placeholder="Subscribe to our newsletter" />
-                <button>Subscribe</button>
-            </div>
-            <div className="footer-contacts">
-                <div>
-                    <p>India</p>
-                    <p>🇮🇳 +91 9790911149</p>
+const Footer = () => {
+    return (
+        <footer className="footer">
+            <div className="footer-container">
+
+                {/* Logo and Description */}
+                <div className="footer-logo-section">
+                    <img src="/src/assets/logo1.png" alt="SafeConnect Logo" className="footer-logo" />
+                    <p className="footer-description">
+                        SafeConnect – Secure your connections effortlessly with our app. Providing safety and security at your fingertips.
+                    </p>
                 </div>
-                <div>
-                    <p>Australia</p>
-                    <p>🇦🇺 +61 450 601 818</p>
+
+
+
+            
+                {/* Address Section */}
+                <div className="footer-address-section">
+                    <h4>Address</h4>
+                    <p>123 SafeConnect Ave,<br /> Tech City, Innovation Park,<br /> Zip Code 123456</p>
                 </div>
-                <a href="mailto:info@imsafe.app">info@imsafe.app</a>
+                {/* Redirections Section */}
+                <div className="footer-links-section">
+                    <h4>Quick Links</h4>
+                    <Link to="/">Home</Link>
+                    <Link to="/about">About Us</Link>
+                    <Link to="/contact">Contact Us</Link>
+                    <Link to="/privacy">Privacy Policy</Link>
+                </div>
+
+
+
+
+
+                {/* Social Media Icons
+                <div className="footer-social-section">
+                    <h4>Follow Us</h4>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+                </div> */}
+
+    {/* Contact Section */}
+    <div className="footer-address-section">
+                    <h4>Contact Us</h4>
+                    <p>Email: support@yourapp.com</p>
+                    <p>Phone: +1 (123) 456-7890</p>
+                    <p>If you have any questions or need assistance, feel free to <a href="+1 (123) 456-7890">+1 (123) 456-7890</a> through our form.</p>
+                </div>
+                
+
             </div>
-            <div className="footer-social">
-                <p>Connect with us</p>
-                <a href="#"><img src="../assets/icon-x.png" alt="X" /></a>
-                <a href="#"><img src="../assets/icon-facebook.png" alt="Facebook" /></a>
-                <a href="#"><img src="../assets/icon-instagram.png" alt="Instagram" /></a>
-                <a href="#"><img src="../assets/icon-linkedin.png" alt="LinkedIn" /></a>
+            <div className="footer-bottom">
+                <p>&copy; {new Date().getFullYear()} SafeConnect. All rights reserved.</p>
             </div>
-        </div>
-        <div className="footer-bottom">
-            <a href="#">Terms of Service</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Disclaimer Policy</a>
-            <p>Copyright © 2024 I’M SAFE APP. All rights reserved.</p>
-        </div>
-    </footer>
-);
+        </footer>
+    );
+};
 
 export default Footer;

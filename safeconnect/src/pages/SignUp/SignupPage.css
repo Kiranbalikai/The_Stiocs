@@ -1,35 +1,210 @@
-/* Responsive styles for smaller screens */
-@media (max-width: 425px) {
+/* Main container for the signup page */
+.signup-page {
+    min-height: 100vh;
+    display: flex;
+    background: linear-gradient(to right, #4a1d3e 50%, #fdf0f7 50%);
+}
+
+.left-section {
+    flex: 1;
+    padding: 4rem;
+    color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.brand-content {
+    z-index: 1;
+}
+
+.brand-content h1 {
+    font-size: 3.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.brand-content p {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.decorative-cards {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 200px;
+}
+
+.card {
+    position: absolute;
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.white-card {
+    background: white;
+    transform: rotate(-15deg);
+    z-index: 1;
+}
+
+.coral-card {
+    background: #ff6b6b;
+    transform: rotate(15deg);
+}
+
+.right-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.signup-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+.signup-card h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+/* Uniform rectangular border for all input fields */
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="password"] 
+input[type="name"], 
+input[type="date"] { 
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: #333;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+input[type="name"]:focus, 
+input[type="password"]:focus {
+    outline: none;
+    border-color: #333;
+}
+
+/* Placeholder styling */
+input::placeholder {
+    color: #999;
+}
+
+.password-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.forgot-link {
+    font-size: 0.875rem;
+    color: #666;
+    text-decoration: none;
+}
+
+.password-input-container {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    color: #666;
+    cursor: pointer;
+}
+
+.create-account-button {
+    width: 100%;
+    padding: 0.75rem;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.login-text {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #666;
+    margin-top: 1.5rem;
+}
+
+.login-link {
+    color: #2d7ff9;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
     .signup-page {
         flex-direction: column;
         background: #fdf0f7;
     }
 
     .left-section {
-        padding: 1.5rem;
-        min-height: 200px;
+        padding: 2rem;
+        min-height: 300px;
         background: #4a1d3e;
-        align-items: center; /* Center align for smaller screens */
-        text-align: center;
     }
 
     .brand-content h1 {
-        font-size: 2rem; /* Smaller heading */
-        line-height: 1.1; /* Tighter line height */
-    }
-
-    .brand-content p {
-        font-size: 0.9rem; /* Slightly smaller text */
+        font-size: 2.5rem;
     }
 
     .decorative-cards {
-        bottom: 5%;
-        width: 150px; /* Smaller size for decorative elements */
+        bottom: 10%;
+        width: 200px;
     }
 
     .card {
-        width: 100px;
-        height: 150px;
+        width: 150px;
+        height: 225px;
     }
 
     .right-section {
@@ -37,35 +212,6 @@
     }
 
     .signup-card {
-        padding: 1rem;
-        max-width: 90%; /* Narrower card for smaller screens */
-    }
-
-    .signup-card h2 {
-        font-size: 1.25rem;
-    }
-
-    .form-group {
-        margin-bottom: 0.75rem;
-    }
-
-    label {
-        font-size: 0.8rem;
-    }
-
-    input {
-        padding: 0.6rem; /* Smaller padding for inputs */
-        font-size: 0.8rem; /* Slightly smaller font size */
-    }
-
-    .create-account-button {
-        padding: 0.6rem;
-        font-size: 0.85rem;
-        margin-top: 0.75rem;
-    }
-
-    .login-text {
-        font-size: 0.8rem;
-        margin-top: 1rem;
+        padding: 1.5rem;
     }
 }

@@ -93,9 +93,6 @@ const SignupPage = () => {
                         <div className="form-group">
                             <div className="password-header">
                                 <label htmlFor="password">Password</label>
-                                <Link to="/forgot-password" className="forgot-link">
-                                    Forgot?
-                                </Link>
                             </div>
                             <div className="password-input-container">
                                 <input

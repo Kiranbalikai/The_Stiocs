@@ -1,12 +1,22 @@
 /* Base styles for the navbar */
+
+/* Base styles for the navbar */
 .navbar {
+    padding: 15px 40px;
+    position: fixed;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px 40px;
+    justify-content: space-between; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    z-index: 1000; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
     background-color: white;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
+
+
 
 /* Logo section */
 .navbar-logo {
