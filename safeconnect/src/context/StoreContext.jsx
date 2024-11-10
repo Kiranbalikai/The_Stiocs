@@ -47,6 +47,7 @@ const StoreContextProvider = (props) => {
     // Logout function
     const logout = () => {
         setToken(''); // Clear token from context and localStorage
+        // Optionally reset other session data here if necessary
     };
 
     // Context value to pass to other components

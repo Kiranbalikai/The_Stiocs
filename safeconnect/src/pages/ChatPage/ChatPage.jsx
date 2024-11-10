@@ -70,37 +70,53 @@ const ChatPage = () => {
         setIsLoading(true);
     
         try {
+            // Test server connection first
+            console.log('Testing server connection...');
+            const testResponse = await fetch('http://localhost:5000/test')
+                .catch(error => {
+                    console.error('Server test failed:', error);
+                    throw new Error('Cannot connect to server. Please make sure the backend is running on port 5000.');
+                });
+    
+            if (!testResponse.ok) {
+                throw new Error(`Server test failed with status: ${testResponse.status}`);
+            }
+    
+            console.log('Server connection successful, uploading image...');
+    
+            // Create FormData
             const formData = new FormData();
             formData.append('image', file);
     
-            const response = await fetch('/api/check-image', {
+            // Upload image
+            const response = await fetch('http://localhost:5000/api/check-image', {
                 method: 'POST',
                 body: formData
             });
     
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+                throw new Error(`Image upload failed with status: ${response.status}`);
             }
     
             const data = await response.json();
-            const isInappropriate = data.isNude;
+            console.log('Upload response:', data);
     
+            // Create temporary URL for the image
             const imageUrl = URL.createObjectURL(file);
     
-            setMessages([
-                ...messages,
-                {
-                    sender,
-                    type: 'image',
-                    imageUrl: isInappropriate ? null : imageUrl,
-                    text: isInappropriate ? '*****' : null,
-                    time: new Date().toLocaleTimeString(),
-                    isInappropriate
-                }
-            ]);
+            // Add message with image
+            setMessages(prev => [...prev, {
+                sender,
+                type: 'image',
+                imageUrl: data.isNude ? null : imageUrl,
+                text: data.isNude ? '***** Inappropriate image removed *****' : null,
+                time: new Date().toLocaleTimeString(),
+                isInappropriate: data.isNude
+            }]);
+    
         } catch (error) {
-            console.error('Error uploading image:', error.message);
-            alert('Failed to upload image. Please check your server configuration and try again.');
+            console.error('Error:', error);
+            alert(error.message);
         } finally {
             setIsLoading(false);
             e.target.value = '';
