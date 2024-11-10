@@ -13,7 +13,7 @@ import { ToastContainer } from 'react-toastify'; // Import ToastContainer to sho
 
 
 function App() {
-  return ( 
+  return (
     <StoreContextProvider>  {/* Wrap the whole app in StoreContextProvider */}
       <Router>
         <div className="App">
@@ -23,12 +23,13 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/call" element={<Caller />} />
-            <Route path="/choice" element={<Choice />} />
+            <Route path="/choice" element={<Choice />} /> {/* Correct route for choice page */}
             <Route path="/chatpage" element={<ChatPage />} />
           </Routes>
           <Footer />
         </div>
       </Router>
+
       <ToastContainer />  {/* Render the toast notifications here */}
     </StoreContextProvider>
   );

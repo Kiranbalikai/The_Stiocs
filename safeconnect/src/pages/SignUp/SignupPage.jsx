@@ -1,78 +1,70 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
-import axios from 'axios'; // Import axios for sending HTTP requests
-import DatePicker from 'react-datepicker'; // Import DatePicker
-import 'react-datepicker/dist/react-datepicker.css'; // Import CSS for DatePicker
+import axios from 'axios'; 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './SignupPage.css';
 
 const SignupPage = () => {
     const [formData, setFormData] = useState({
         name: '',
         phoneno: '',
-        dob: null, // Initialize as null to work with DatePicker
+        dob: '',
         email: '',
         password: ''
     });
-
+    
     const [showPassword, setShowPassword] = useState(false);
-    const [loading, setLoading] = useState(false); // To show a loading state
-    const [error, setError] = useState(''); // To handle error messages
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({
+        setFormData(prev => ({
             ...prev,
-            [name]: value || '', // Default to an empty string if value is undefined
-        }));
-    };
-
-    const handleDateChange = (date) => {
-        setFormData((prev) => ({
-            ...prev,
-            dob: date
+            [name]: value
         }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // Set loading to true
         setLoading(true);
-        setError('');
 
         try {
-            // Send a POST request to the backend API
             const response = await axios.post(
                 'http://localhost:4000/api/user/register',
                 formData,
                 {
                     headers: {
-                        'Content-Type': 'application/json',  // Ensure proper content type is set
+                        'Content-Type': 'application/json',
                     }
                 }
             );
 
-            // Check if the response is successful
             if (response.data.success) {
-                // If successful, you can navigate to login or display success message
-                alert('Account created successfully!');
-                // Optionally, redirect to login page
-                // window.location.href = '/login'; // Or use react-router if you need to navigate programmatically
+                toast.success("Account created successfully!");
+                setTimeout(() => {
+                    navigate('/login');
+                }, 2000);
             } else {
-                // Handle errors returned from the server
-                setError(response.data.message || 'Something went wrong, please try again.');
+                toast.error(response.data.message || 'Registration failed. Please try again.');
             }
         } catch (err) {
-            // Handle network errors
-            console.error('Error during registration:', err.response || err.message);  // Log the error
-            setError('An error occurred. Please try again later.');  // Set error message to display in UI
+            console.error('Error during registration:', err);
+            
+            if (err.response) {
+                toast.error(err.response.data.message || 'Registration failed. Please try again.');
+            } else if (err.request) {
+                toast.error('No response from server. Please try again later.');
+            } else {
+                toast.error('An unexpected error occurred. Please try again.');
+            }
         } finally {
-            // Set loading to false after the request
             setLoading(false);
         }
     };
-
+    
     return (
         <div className="signup-page">
             <div className="left-section">
@@ -88,13 +80,12 @@ const SignupPage = () => {
             <div className="right-section">
                 <div className="signup-card">
                     <h2>Create an account</h2>
-                    {error && <p className="error-message">{error}</p>} {/* Display error message if any */}
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <label htmlFor="name">Full Name</label>
+                            <label htmlFor="fullName">Full Name</label>
                             <input
-                                type="text"
-                                id="name"
+                                type="tel"
+                                id="fullName"
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
@@ -103,14 +94,25 @@ const SignupPage = () => {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="phoneno">Phone No</label>
+                            <label htmlFor="phoneNo">Phone No</label>
                             <input
                                 type="tel"
-                                id="phoneno"
+                                id="phoneNo"
                                 name="phoneno"
                                 value={formData.phoneno}
                                 onChange={handleChange}
                                 placeholder="Enter your phone number"
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="dob">Date Of Birth</label>
+                            <input
+                                type="date"
+                                id="dob"
+                                name="dob"
+                                value={formData.dob}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
@@ -123,19 +125,6 @@ const SignupPage = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 placeholder="Enter your email"
-                                required
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="dob">Date of Birth</label>
-                            <DatePicker
-                                selected={formData.dob}
-                                onChange={handleDateChange}
-                                dateFormat="yyyy-MM-dd"
-                                placeholderText="Select your date of birth"
-                                showMonthDropdown
-                                showYearDropdown
-                                dropdownMode="select"
                                 required
                             />
                         </div>
@@ -175,6 +164,7 @@ const SignupPage = () => {
                     </p>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };

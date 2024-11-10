@@ -1,5 +1,7 @@
 /* Main container styling for the home header */
-.home-header {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Italiana&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Sacramento&display=swap');.home-header {
     background-color: #ffffff;
     color: #FEF4F8;
     padding: 2rem 7rem;
@@ -16,18 +18,19 @@
 .home-header h1 {
     font-size: 5rem;
     font-weight: bold;
-    font-family: 'Gill Sans', 'Nunito Sans', sans-serif;
+    font-family: "Faculty Glyphic", sans-serif;
     margin-bottom: 1rem;
-    color: #FE7678;
+    color:#fc538e;
+    font-weight: 100;
     line-height: 1.2;
 }
 
 /* Paragraph styling */
 .home-header p {
-    font-size: 1.3rem;
-    font-family: 'Gill Sans', 'Nunito Sans', sans-serif;
+    font-size: 1.2rem;
+    font-family: "Faculty Glyphic", sans-serif;
     line-height: 1.5rem;
-    color: #bbb;
+    color:#fc538e75;
 }
 
 .content-block{
@@ -37,4 +40,53 @@
 
 .content-block p{
 padding: 15px 0px;
+font-family: "Montserrat", sans-serif;
+line-height: 1.8;
+font-size: 1rem;
+color:#d65289e9;
+text-align: justify;
+}
+
+.content-block h1{
+    font-family: "Faculty Glyphic", sans-serif;
+    font-size: 2rem;
+    color:#ff1265;
+}
+.contact-section{
+    margin:0px 150px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-image img {
+    width: 300px;
+    height: auto; /* Maintain aspect ratio */
+}
+
+.contact-content h2{
+    font-family: "Faculty Glyphic", sans-serif;
+    font-size: 2rem;
+    color:#ff1265;
+}
+.contact-content p{
+    font-family: "Montserrat", sans-serif;
+font-size: 1rem;
+color:#d65289e9;
+}
+
+.contact-content label{
+    font-family: "Montserrat", sans-serif;
+font-size: 1rem;
+color:#bb316be9;
+}
+
+.submit-button{
+    color:#ffffffe9;
+    background-color: #bb316be9;
+    padding: 10px 25px;
+    margin-bottom:10px ;
+}
+.submit-button:hover{
+background-color: #ff1265;
+transition-duration: 600ms;
 }

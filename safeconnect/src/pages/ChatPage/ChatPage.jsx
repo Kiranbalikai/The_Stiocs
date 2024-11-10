@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './ChatPage.css';
 
 const ChatPage = () => {
@@ -11,13 +11,31 @@ const ChatPage = () => {
     const [newMessageB, setNewMessageB] = useState('');
     const [blockB, setBlockB] = useState(false);
     const [reported, setReported] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    // Create refs for both chat boxes and file inputs
+    const chatBoxARef = useRef(null);
+    const chatBoxBRef = useRef(null);
+    const fileInputARef = useRef(null);
+    const fileInputBRef = useRef(null);
 
     const inappropriateWords = ['badword', 'adult', 'sex', 'pp', 'dick', 'vag'];
+
+    // Auto-scroll effect
+    useEffect(() => {
+        if (chatBoxARef.current) {
+            chatBoxARef.current.scrollTop = chatBoxARef.current.scrollHeight;
+        }
+        if (chatBoxBRef.current) {
+            chatBoxBRef.current.scrollTop = chatBoxBRef.current.scrollHeight;
+        }
+    }, [messages]);
 
     const handleSendMessage = (sender) => {
         let message = sender === 'A' ? newMessageA : newMessageB;
 
-        // Check for inappropriate words
+        if (message.trim() === '') return;
+
         const hasInappropriateWord = inappropriateWords.some(word => 
             message.toLowerCase().includes(word.toLowerCase())
         );
@@ -28,17 +46,68 @@ const ChatPage = () => {
                 sender, 
                 text: hasInappropriateWord ? '*****' : message, 
                 time: new Date().toLocaleTimeString(),
-                isInappropriate: hasInappropriateWord
+                isInappropriate: hasInappropriateWord,
+                type: 'text'
             },
         ]);
 
-        // Clear the input after sending
         if (sender === 'A') {
             setNewMessageA('');
         } else {
             setNewMessageB('');
         }
     };
+
+    const handleImageSelect = async (sender) => {
+        const fileInput = sender === 'A' ? fileInputARef.current : fileInputBRef.current;
+        fileInput.click();
+    };
+
+    const handleImageUpload = async (e, sender) => {
+        const file = e.target.files[0];
+        if (!file) return;
+    
+        setIsLoading(true);
+    
+        try {
+            const formData = new FormData();
+            formData.append('image', file);
+    
+            const response = await fetch('/api/check-image', {
+                method: 'POST',
+                body: formData
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+            }
+    
+            const data = await response.json();
+            const isInappropriate = data.isNude;
+    
+            const imageUrl = URL.createObjectURL(file);
+    
+            setMessages([
+                ...messages,
+                {
+                    sender,
+                    type: 'image',
+                    imageUrl: isInappropriate ? null : imageUrl,
+                    text: isInappropriate ? '*****' : null,
+                    time: new Date().toLocaleTimeString(),
+                    isInappropriate
+                }
+            ]);
+        } catch (error) {
+            console.error('Error uploading image:', error.message);
+            alert('Failed to upload image. Please check your server configuration and try again.');
+        } finally {
+            setIsLoading(false);
+            e.target.value = '';
+        }
+    };
+    ;
+    
 
     const handleReport = () => {
         setReported(true);
@@ -50,11 +119,36 @@ const ChatPage = () => {
         alert('User blocked!');
     };
 
+    const handleKeyPress = (e, sender) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSendMessage(sender);
+        }
+    };
+
+    const renderMessage = (message) => {
+        if (message.type === 'image') {
+            return message.isInappropriate ? (
+                <div className="inappropriate-image">
+                    <p>***** Inappropriate image removed *****</p>
+                </div>
+            ) : (
+                <img 
+                    src={message.imageUrl} 
+                    alt="Shared" 
+                    className="shared-image"
+                    onLoad={() => URL.revokeObjectURL(message.imageUrl)}
+                />
+            );
+        }
+        return <p>{message.text}</p>;
+    };
+
     return (
         <div className="chat-page">
             <div className="device-container">
                 <div className="device">
-                    <div className="chat-box">
+                    <div className="chat-box" ref={chatBoxARef}>
                         <h2>Chat with Person B</h2>
                         {messages.map((message, index) => (
                             <div
@@ -62,10 +156,9 @@ const ChatPage = () => {
                                 className={`message ${message.sender === 'A' ? 'sender-a' : 'sender-b'}`}
                             >
                                 <div className="message-content">
-                                    <p>{message.text}</p>
+                                    {renderMessage(message)}
                                     <small>{message.time}</small>
                                 </div>
-                                {/* Show block/report buttons when Person B sends inappropriate message */}
                                 {message.isInappropriate && message.sender === 'B' && !blockB && (
                                     <div className="action-buttons">
                                         <button className="action-btn" onClick={handleBlock}>Block</button>
@@ -74,22 +167,37 @@ const ChatPage = () => {
                                 )}
                             </div>
                         ))}
-                        {!blockB && (
-                            <div className="actions">
-                                <textarea
-                                    value={newMessageA}
-                                    onChange={(e) => setNewMessageA(e.target.value)}
-                                    placeholder="Type your message..."
-                                    rows="4"
-                                />
-                                <button className="send-btn" onClick={() => handleSendMessage('A')}>Send</button>
-                            </div>
-                        )}
                     </div>
+                    {!blockB && (
+                        <div className="actions">
+                            <textarea
+                                value={newMessageA}
+                                onChange={(e) => setNewMessageA(e.target.value)}
+                                onKeyPress={(e) => handleKeyPress(e, 'A')}
+                                placeholder="Type your message..."
+                                rows="4"
+                            />
+                            <div className="button-group">
+                                <button className="send-btn" onClick={() => handleSendMessage('A')} disabled={isLoading}>
+                                    Send
+                                </button>
+                                <button className="photo-btn" onClick={() => handleImageSelect('A')} disabled={isLoading}>
+                                    Send Photo
+                                </button>
+                                <input
+                                    type="file"
+                                    ref={fileInputARef}
+                                    onChange={(e) => handleImageUpload(e, 'A')}
+                                    accept="image/*"
+                                    style={{ display: 'none' }}
+                                />
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <div className="device">
-                    <div className="chat-box">
+                    <div className="chat-box" ref={chatBoxBRef}>
                         <h2>Chat with Person A</h2>
                         {messages.map((message, index) => (
                             <div
@@ -97,10 +205,9 @@ const ChatPage = () => {
                                 className={`message ${message.sender === 'B' ? 'sender-b' : 'sender-a'}`}
                             >
                                 <div className="message-content">
-                                    <p>{message.text}</p>
+                                    {renderMessage(message)}
                                     <small>{message.time}</small>
                                 </div>
-                                {/* Show block/report buttons when Person A sends inappropriate message */}
                                 {message.isInappropriate && message.sender === 'A' && !blockB && (
                                     <div className="action-buttons">
                                         <button className="action-btn" onClick={handleBlock}>Block</button>
@@ -109,18 +216,33 @@ const ChatPage = () => {
                                 )}
                             </div>
                         ))}
-                        {!blockB && (
-                            <div className="actions">
-                                <textarea
-                                    value={newMessageB}
-                                    onChange={(e) => setNewMessageB(e.target.value)}
-                                    placeholder="Type your message..."
-                                    rows="4"
-                                />
-                                <button className="send-btn" onClick={() => handleSendMessage('B')}>Send</button>
-                            </div>
-                        )}
                     </div>
+                    {!blockB && (
+                        <div className="actions">
+                            <textarea
+                                value={newMessageB}
+                                onChange={(e) => setNewMessageB(e.target.value)}
+                                onKeyPress={(e) => handleKeyPress(e, 'B')}
+                                placeholder="Type your message..."
+                                rows="4"
+                            />
+                            <div className="button-group">
+                                <button className="send-btn" onClick={() => handleSendMessage('B')} disabled={isLoading}>
+                                    Send
+                                </button>
+                                <button className="photo-btn" onClick={() => handleImageSelect('B')} disabled={isLoading}>
+                                    Send Photo
+                                </button>
+                                <input
+                                    type="file"
+                                    ref={fileInputBRef}
+                                    onChange={(e) => handleImageUpload(e, 'B')}
+                                    accept="image/*"
+                                    style={{ display: 'none' }}
+                                />
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
 

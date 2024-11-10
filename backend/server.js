@@ -14,7 +14,7 @@ app.use(cors({
     origin: [
         'http://localhost:3000', // Local dev environment
         'https://3486-2405-201-d02f-d003-d4ad-d2e2-792c-c8b9.ngrok-free.app',// Your Ngrok URL
-        'http://localhost:5173'
+        'http://localhost:5173','http://192.168.29.220:5173'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,

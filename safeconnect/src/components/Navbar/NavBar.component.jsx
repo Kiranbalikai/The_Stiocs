@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { StoreContext } from '../../context/StoreContext'; // Correct path to StoreContext
 import './NavBar.css';
 
 const NavBar = () => {
+    const { token, logout } = useContext(StoreContext);  // Get token and logout from context
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -17,11 +19,25 @@ const NavBar = () => {
             <button className="navbar-toggle" onClick={toggleMenu}>
                 ☰
             </button>
-            <div className={`navbar-links ${isMenuOpen ? "show" : ""}`}>
+            <div className={`navbar-links ${isMenuOpen ? 'show' : ''}`}>
                 <Link to="/" onClick={toggleMenu}>Home</Link>
-                <Link to="/about" onClick={toggleMenu}>About</Link>
+                <Link to="/choice" onClick={toggleMenu}>Services</Link>
                 <Link to="/contact" onClick={toggleMenu}>Contact Us</Link>
-                <Link to="/login" className="navbar-button" onClick={toggleMenu} style={{ color: "#ffffff" }}>Log In</Link>
+
+                {/* Conditionally render Log In or Profile Icon */}
+                {token ? (
+                    <div className="profile-icon" onClick={logout}>
+                        <img
+                            src="/src/assets/profile_icon.png"
+                            alt="Profile"
+                            className="profile-icon-img"
+                        />
+                    </div>
+                ) : (
+                    <Link to="/login" className="navbar-button" onClick={toggleMenu} style={{ color: '#ffffff' }}>
+                        Log In
+                    </Link>
+                )}
             </div>
         </nav>
     );
